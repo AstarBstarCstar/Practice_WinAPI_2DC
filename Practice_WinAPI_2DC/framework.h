@@ -26,5 +26,15 @@
 
 
 /*전역변수 선언 (instance,handle)*/
-extern HINSTANCE m_hInstance;
-extern HWND m_hWnd;              /*TODO:이부분 당최 모르겠다*/
+extern HINSTANCE m_hInstance;	 /*어딘가에 이 변수가 있을거니까 그거 써도된다 의미(extern:외부변수) 함수로 치면 전방선언 느낌*/
+extern HWND m_hWnd;              /*어딘가에 이 변수가 있을거니까 그거 써도된다 의미(extern:외부변수)*/
+
+
+
+/*
+1. 지역변수 : 함수 내에서 만들어짐
+2. 전역변수 : 함수 외부 전역에서 만들어짐
+3. 정적변수 : 함수 내부에서 만들어지지만 데이터 영역에 있음
+4. 외부변수 : 다른 곳에서 만들어짐
+5. 멤버변수 : 클래스 안에 선언되고 인스턴스가 생성될 당시에 만들어짐
+*/
