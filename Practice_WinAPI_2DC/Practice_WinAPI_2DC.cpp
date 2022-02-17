@@ -7,9 +7,10 @@
 #define MAX_LOADSTRING 100
 
 // 전역 변수:
-HINSTANCE hInst;                                // 현재 인스턴스입니다.
-WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
-WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
+HINSTANCE hInst;                                // 현재 인스턴스입니다. 프로그램에 대한 시작 핸들값
+WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다. 타이틀       옆 변수들은 typedef로 변수 이름 바꾼것
+WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다. 이름
+
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -17,16 +18,22 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
-int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
-                     _In_opt_ HINSTANCE hPrevInstance,
-                     _In_ LPWSTR    lpCmdLine,
-                     _In_ int       nCmdShow)
-{
+
+
+/*이곳이 윈도우 메인이며, 윈도우 메인의 역할은 1.윈도우창 세팅 후 화면에 띄우기, 2.메세지 루프*/
+/*_In_ : SAL 주석 - 자주 사용되는 주석을 적지 않고 키워드로 사용*/
+int APIENTRY wWinMain(_In_ HINSTANCE hInstance,           /*hInstance : 실행된 프로세스의 시작 주소. 인스턴스 핸들*/
+                     _In_opt_ HINSTANCE hPrevInstance,    /*hPrevInstance : 이전 실행 인스턴스 핸들 hprev<-*/
+                     _In_ LPWSTR    lpCmdLine,            /*lpCmdLine : 명령으로 입력된 프로그램의 인수(cmd)  ex) cmd에 프로그램 드래그 */
+                     _In_ int       nCmdShow)             /*nCmdShow:프로그램이 시작될 형태*/
+
+{    /*사용되지 않은 매개변수 정의 (이전버전에 쓰던거라던지)*/
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: 여기에 코드를 입력합니다.
-
+    
+    /*TODO:리소스 뷰의 string table 용도*/
     // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_PRACTICEWINAPI2DC, szWindowClass, MAX_LOADSTRING);
@@ -38,17 +45,20 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return FALSE;
     }
 
+    /*단축키 정보*/
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_PRACTICEWINAPI2DC));
 
-    MSG msg;
+    MSG msg;/*메세지 정의*/
 
     // 기본 메시지 루프입니다:
-    while (GetMessage(&msg, nullptr, 0, 0))
-    {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+    /*여기서 메시지 큐에서 메시지가 확인 될 때까지 대기(무한루프)*/
+    /*TODO:메시지 큐에 msg.message == WM_QUIT 인 경우 false를 반환한다*/
+    while (GetMessage(&msg, nullptr, 0, 0))//GetMessage : 메시지 큐에 메시지가 없으면 대기함. 메시지가 들어왔다면 True 를 반환
+    {                                     /*PeekMessage : 메시지 큐에 메시지가 없다면 false, 있다면 true 반환*/
+        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) //TranslateAccelerator : 단축키 대한 처리
         {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
+            TranslateMessage(&msg);  //키보드 입력 메시지 처리 담당
+            DispatchMessage(&msg);   //
         }
     }
 
@@ -64,21 +74,21 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 //
 ATOM MyRegisterClass(HINSTANCE hInstance)
 {
-    WNDCLASSEXW wcex;
+    WNDCLASSEXW wcex;/*윈도우 창의 정보를 저장하기 위한 구조체이다*/
 
-    wcex.cbSize = sizeof(WNDCLASSEX);
+    wcex.cbSize = sizeof(WNDCLASSEX);//구조체의 크기 설정
 
-    wcex.style          = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc    = WndProc;
-    wcex.cbClsExtra     = 0;
-    wcex.cbWndExtra     = 0;
-    wcex.hInstance      = hInstance;
-    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_PRACTICEWINAPI2DC));
-    wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
-    wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_PRACTICEWINAPI2DC);
-    wcex.lpszClassName  = szWindowClass;
-    wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
+    wcex.style          = CS_HREDRAW | CS_VREDRAW;              // 윈도우 클래스의 스타일 지정하는 얘
+    wcex.lpfnWndProc    = WndProc;                               // 윈도우의 메세지를 처리하는 함수 WndProc
+    wcex.cbClsExtra     = 0;                                   // 윈도우 클래스에서 사용하고자 하는 여분의 메모리의 양            
+    wcex.cbWndExtra     = 0;                                   // cbClsExtra와 유사하지만 개별윈도우에서 사용하고자 하는 여분의 메모리의 양
+    wcex.hInstance      = hInstance;                             // 윈도우 클래스를 등록한 인스턴스 핸들값 지정
+    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_PRACTICEWINAPI2DC));//윈도우의 아이콘
+    wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);       //커서설정
+    wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);            //윈도우 작업영역에 칠한 배경 
+    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_PRACTICEWINAPI2DC);  //윈도우 메뉴 지정
+    wcex.lpszClassName  = szWindowClass;                      //윈도우 클래스 이름
+    wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));//작은 아이콘 리소스 로드
 
     return RegisterClassExW(&wcex);
 }
@@ -97,20 +107,48 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+   HWND hWnd = CreateWindowW(szWindowClass,       //클래스의 이름
+                             szTitle,             //윈도우 타이틀 이름
+                             WINSTYLE,            //윈도우 스타일, TODO:내부 뜯어서 보여주기
+                             WINSTARTX,           //윈도우 화면의 X축
+                             WINSTARTY,           //윈도우 화면의 Y축
+                             WINSIZEX,            //가로 크기
+                             WINSIZEY,            //세로 크기  
+                             nullptr,             //부모 윈도우
+                             nullptr,             //메뉴 핸들
+                             hInstance,           //인스턴스 지정
+                             nullptr);            //추가 매개변수
 
    if (!hWnd)
    {
-      return FALSE;
+      return FALSE;//hWnd제데로 호출 안 될시 꺼버린다
    }
 
-   ShowWindow(hWnd, nCmdShow);
-   UpdateWindow(hWnd);
+   /*실제 윈도우 크기를 구하기 위해서 Adjust를 사용함*/
+   RECT rc;
+   rc.left = 0;
+   rc.top = 0;
+   rc.right = WINSIZEX;
+   rc.bottom = WINSIZEY;
+
+   /*실제 윈도우 창이 크기에 맞게 나온다*/
+   AdjustWindowRect(&rc, WINSTYLE, false);
+
+   /*위 RECT정보로 윈도우 사이즈를 세팅*/
+   SetWindowPos(hWnd, NULL, WINSTARTX, WINSTARTY, (rc.right - rc.left), (rc.bottom - rc.top), SWP_NOZORDER | SWP_NOMOVE); //TODO::여기 뭔소린지 모르겠다 당최
+
+   ShowWindow(hWnd, nCmdShow);  //윈도우 보여주기
+   UpdateWindow(hWnd);          //윈도우 업데이트 하기
 
    return TRUE;
 }
-
+/*TODO:여기 뭔소린지 모르겠다
+WndPrc : 메시지를 운영체제에 전달함. 강제로 운영체제가 호출함.
+hWnd : 메시지가 어느 윈도우를 대상으로 전달되었는지 구분한다.
+message : 메시지 구분번호
+wParam : unsigned int 메시지의 매개변수 1
+lParam : unsigned long 메시지의 매개변수 2
+*/
 //
 //  함수: WndProc(HWND, UINT, WPARAM, LPARAM)
 //
@@ -121,6 +159,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_DESTROY  - 종료 메시지를 게시하고 반환합니다.
 //
 //
+const int g_rectXSize = 50;
+const int g_rectYSize = 100;
+
+POINT g_rectPos = { 500,500 };
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
@@ -142,16 +185,39 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
-    case WM_PAINT:
-        {
-            PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
-            EndPaint(hWnd, &ps);
-        }
+
+    case WM_PAINT://윈도우의 작업영역이 다시 그려져야 할 때 실행됨 (무효화영역 발생시 실행? TODO:뭔소리?)
+    {
+        PAINTSTRUCT ps;
+        /*Device Context 만들어서 ID를 반환*/
+        HDC hdc = BeginPaint(hWnd, &ps);
+
+        // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+        Rectangle(hdc, g_rectPos.x - g_rectXSize, g_rectPos.y - g_rectYSize, g_rectPos.x + g_rectXSize, g_rectPos.y + g_rectYSize);
+        EndPaint(hWnd, &ps);
+    }
         break;
-    case WM_DESTROY:
-        PostQuitMessage(0);
+    case WM_KEYDOWN://키다운 발생시 이쪽 실행
+        switch (wParam)
+        {
+        case VK_LEFT:
+            g_rectPos.x -= 10;
+            break;
+        case VK_RIGHT:
+            g_rectPos.x += 10;
+            break;
+        case VK_UP:
+            g_rectPos.y -= 10;
+            break;
+        case VK_DOWN:
+            g_rectPos.y += 10;
+            break;
+        }
+        InvalidateRect(hWnd, NULL, false);/*TODO: 이거 무슨소리지?*/
+        break;
+
+    case WM_DESTROY:/*윈도우 종료시 실행*/
+        PostQuitMessage(0);/*메시지큐 뒤에 WM_QUIT 입력*/
         break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
@@ -178,3 +244,28 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     }
     return (INT_PTR)FALSE;
 }
+
+
+//        /*
+//        DC 의 목적지는 hWnd
+//        DC 의 펜은 기본펜이다(검정)
+//        DC 의 브러쉬는 기본 브러쉬이다(white)
+//        */
+
+//        /*직접 펜과 브러쉬를 만들어서 DC에 적용*/
+//        HPEN hRedPen = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
+//        HBRUSH hBlueBrush = CreateSolidBrush(RGB(0, 0, 255));
+
+//        /*기존의 펜과 브러쉬 아이디를 받아 저장*/
+//        HPEN hOldPen = (HPEN)SelectObject(hdc, hRedPen);
+//        HBRUSH hOldBrush = (HBRUSH)SelectObject(hdc, hBlueBrush);
+
+//        Ellipse(hdc, x - 100, y - 100, x + 100, y + 100);
+//        Rectangle(hdc, g_keypos.x - 50, g_keypos.y - 50, g_keypos.x + 50, g_keypos.y + 50);
+
+//        /*DC의 펜과 브러쉬를 원래대로 되돌림*/
+//        SelectObject(hdc, hOldBrush);
+//        SelectObject(hdc, hOldPen);
+
+//    EndPaint(hWnd, &ps);
+//}

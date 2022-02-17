@@ -13,3 +13,18 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
+
+
+
+/*:::DEFINE문:::*/
+#define	WINSTARTX	100
+#define	WINSTARTY	100
+#define	WINSIZEX	1280//x해상도
+#define	WINSIZEY	720//y해상도
+#define	WINSTYLE	WS_CAPTION|WS_SYSMENU|WS_MINIMIZEBOX //잘 모르겠지만 아마도 우측 상단 메뉴 구성인듯
+
+
+
+/*전역변수 선언 (instance,handle)*/
+extern HINSTANCE m_hInstance;
+extern HWND m_hWnd;              /*TODO:이부분 당최 모르겠다*/
