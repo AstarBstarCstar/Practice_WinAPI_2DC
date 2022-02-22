@@ -8,6 +8,7 @@
 
 // 전역 변수:
 HINSTANCE hInst;                                // 현재 인스턴스입니다. 프로그램에 대한 시작 핸들값
+HWND hWnd; //<- 나 븅신이야? 이걸 왜 안썻대?
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다. 타이틀       옆 변수들은 typedef로 변수 이름 바꾼것
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다. 이름
 
@@ -23,16 +24,16 @@ INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 /*이곳이 윈도우 메인이며, 윈도우 메인의 역할은 1.윈도우창 세팅 후 화면에 띄우기, 2.메세지 루프*/
 /*_In_ : SAL 주석 - 자주 사용되는 주석을 적지 않고 키워드로 사용*/
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,           /*hInstance : 실행된 프로세스의 시작 주소. 인스턴스 핸들*/
-                     _In_opt_ HINSTANCE hPrevInstance,    /*hPrevInstance : 이전 실행 인스턴스 핸들 hprev<-*/
-                     _In_ LPWSTR    lpCmdLine,            /*lpCmdLine : 명령으로 입력된 프로그램의 인수(cmd)  ex) cmd에 프로그램 드래그 */
-                     _In_ int       nCmdShow)             /*nCmdShow:프로그램이 시작될 형태*/
+    _In_opt_ HINSTANCE hPrevInstance,    /*hPrevInstance : 이전 실행 인스턴스 핸들 hprev<-*/
+    _In_ LPWSTR    lpCmdLine,            /*lpCmdLine : 명령으로 입력된 프로그램의 인수(cmd)  ex) cmd에 프로그램 드래그 */
+    _In_ int       nCmdShow)             /*nCmdShow:프로그램이 시작될 형태*/
 
 {    /*사용되지 않은 매개변수 정의 (이전버전에 쓰던거라던지)*/
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: 여기에 코드를 입력합니다.
-    
+
     /*TODO:리소스 뷰의 string table 용도*/
     // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -40,7 +41,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,           /*hInstance : 실행�
     MyRegisterClass(hInstance);
 
     // 애플리케이션 초기화를 수행합니다:
-    if (!InitInstance (hInstance, nCmdShow))
+    if (!InitInstance(hInstance, nCmdShow))
     {
         return FALSE;
     }
@@ -48,21 +49,50 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,           /*hInstance : 실행�
     /*단축키 정보*/
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_PRACTICEWINAPI2DC));
 
-    MSG msg;/*메세지 정의*/
+    //    MSG msg;/*메세지 정의*/
+    //     /*이부분은 GetMessage 부분 픽메세지로 바꿨으니 한번 참고할것*/
+    //    // 기본 메시지 루프입니다:
+    //    /*여기서 메시지 큐에서 메시지가 확인 될 때까지 대기(무한루프)*/
+    //    /*TODO:메시지 큐에 msg.message == WM_QUIT 인 경우 false를 반환한다*/
+    //    while (GetMessage(&msg, nullptr, 0, 0))//GetMessage : 메시지 큐에 메시지가 없으면 대기함. 메시지가 들어왔다면 True 를 반환
+    //    {                                     /*PeekMessage : 메시지 큐에 메시지가 없다면 false, 있다면 true 반환*/
+    //        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) //TranslateAccelerator : 단축키 대한 처리
+    //        {
+    //            TranslateMessage(&msg);  //키보드 입력 메시지 처리 담당
+    //            DispatchMessage(&msg);   //
+    //        }
+    //    }
+    //
+    //    return (int) msg.wParam;
+    //}
 
-    // 기본 메시지 루프입니다:
-    /*여기서 메시지 큐에서 메시지가 확인 될 때까지 대기(무한루프)*/
-    /*TODO:메시지 큐에 msg.message == WM_QUIT 인 경우 false를 반환한다*/
-    while (GetMessage(&msg, nullptr, 0, 0))//GetMessage : 메시지 큐에 메시지가 없으면 대기함. 메시지가 들어왔다면 True 를 반환
-    {                                     /*PeekMessage : 메시지 큐에 메시지가 없다면 false, 있다면 true 반환*/
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) //TranslateAccelerator : 단축키 대한 처리
+    CCore::getInst()->init();
+
+    /*픽메세지를 통해 게임 처리 가능*/
+    MSG msg; /*GetMessage -> PeekMessage 로 바꿈  !!!중요!!!*/
+    while (1)/*이전 메시지 대기 상태 유지에서 현재 픽메세지의 메시지가 없는 99.99% 상황에서 게임 상황을 처리함*/
+    {
+        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
-            TranslateMessage(&msg);  //키보드 입력 메시지 처리 담당
-            DispatchMessage(&msg);   //
+            if (WM_QUIT == msg.message)
+                break;
+
+            if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+            {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
+        }
+        else
+        {
+            /*
+            게임 처리
+            게임 업데이트
+            게임 그려주기*/
         }
     }
 
-    return (int) msg.wParam;
+    return (int)msg.wParam;
 }
 
 
@@ -190,31 +220,41 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
         PAINTSTRUCT ps;
         /*Device Context 만들어서 ID를 반환*/
-        HDC hdc = BeginPaint(hWnd, &ps);
-
+        HDC hdc = BeginPaint(hWnd, &ps);/*HDC = 그리기 툴 도구모음 같은 정도*/
         // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
-        Rectangle(hdc, g_rectPos.x - g_rectXSize, g_rectPos.y - g_rectYSize, g_rectPos.x + g_rectXSize, g_rectPos.y + g_rectYSize);
-        EndPaint(hWnd, &ps);
+        //HPEN hNewPen = CreatePen(PS_DASH, 3, RGB(255, 0, 0));/*펜스타일 정의*/
+        //HBRUSH hNewBrush = CreateSolidBrush(RGB(0, 255, 0));/*브러쉬 스타일 정의*/
+
+        //HPEN hOldPen = (HPEN)SelectObject(hdc, hNewPen);/*만든 펜 스타일 적용후 hOldPen에 적용*/
+        //HBRUSH hOldBrush = (HBRUSH)SelectObject(hdc, hNewBrush);/*만든 브러쉬 스타일 적용후 hOldBrush에 적용*/
+       
+        //Rectangle(hdc, (g_rectPos.x - g_rectXSize), (g_rectPos.y - g_rectYSize), (g_rectPos.x + g_rectXSize), (g_rectPos.y + g_rectYSize));/*나는 사각형을 이러한 사이즈로 그릴거야*/
+        //SelectObject(hdc, hOldPen);
+        //SelectObject(hdc, hOldBrush);
+
+        //DeleteObject(hOldPen);/*다 그렸으면 올드펜을 반환할것*/
+        //DeleteObject(hOldBrush);/*다 그렸으면 올드브러쉬를 반환할것*/
+        EndPaint(hWnd, &ps);/**/
     }
         break;
-    case WM_KEYDOWN://키다운 발생시 이쪽 실행
-        switch (wParam)
-        {
-        case VK_LEFT:
-            g_rectPos.x -= 10;
-            break;
-        case VK_RIGHT:
-            g_rectPos.x += 10;
-            break;
-        case VK_UP:
-            g_rectPos.y -= 10;
-            break;
-        case VK_DOWN:
-            g_rectPos.y += 10;
-            break;
-        }
-        InvalidateRect(hWnd, NULL, false);/*TODO: 이거 무슨소리지?*/
-        break;
+    //case WM_KEYDOWN://키다운 발생시 이쪽 실행
+    //    switch (wParam)
+    //    {
+    //    case VK_LEFT:
+    //        g_rectPos.x -= 10;
+    //        break;
+    //    case VK_RIGHT:
+    //        g_rectPos.x += 10;
+    //        break;
+    //    case VK_UP:
+    //        g_rectPos.y -= 10;
+    //        break;
+    //    case VK_DOWN:
+    //        g_rectPos.y += 10;
+    //        break;
+    //    }
+    //    InvalidateRect(hWnd, NULL, false);/*TODO: 이거 무슨소리지?*/
+    //    break;
 
     case WM_DESTROY:/*윈도우 종료시 실행*/
         PostQuitMessage(0);/*메시지큐 뒤에 WM_QUIT 입력*/

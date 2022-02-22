@@ -14,7 +14,18 @@
 #include <memory.h>
 #include <tchar.h>
 
+/*STL*/
+#include <string>
+#include <vector>
 
+/*헤더선언*/
+#include "TimeManager.h"
+#include "CCore.h"
+#include "SingleTon.h"
+#include "Struct.h"
+#include "KeyManager.h"
+
+using namespace std;
 
 /*:::DEFINE문:::*/
 #define	WINSTARTX	100
@@ -26,15 +37,13 @@
 
 
 /*전역변수 선언 (instance,handle)*/
-extern HINSTANCE m_hInstance;	 /*어딘가에 이 변수가 있을거니까 그거 써도된다 의미(extern:외부변수) 함수로 치면 전방선언 느낌*/
+extern HINSTANCE m_hInstance;	 /*어딘가에 이 변수가 있을거니까 그거 써도된다 의미(extern:외부변수) 함수로 치면 전방선언*/
 extern HWND m_hWnd;              /*어딘가에 이 변수가 있을거니까 그거 써도된다 의미(extern:외부변수)*/
 
-
-
 /*
-1. 지역변수 : 함수 내에서 만들어짐
-2. 전역변수 : 함수 외부 전역에서 만들어짐
-3. 정적변수 : 함수 내부에서 만들어지지만 데이터 영역에 있음
-4. 외부변수 : 다른 곳에서 만들어짐
-5. 멤버변수 : 클래스 안에 선언되고 인스턴스가 생성될 당시에 만들어짐
+1. 지역변수 : 함수 내에서 만들어짐		
+2. 전역변수 : 함수 외부 전역에서 만들어짐					<-데이터 영역에 저장되며 프로그램 시작부터 끝까지 존재함.
+3. 정적변수 : 함수 내부에서 만들어지지만 데이터 영역에 있음 <-데이터 영역에 존재하며 프로그램 시작부터 끝까지 존재하지만 정적변수가 선언된 위치에서만 쓸 수 있음.
+4. 외부변수 : 다른 곳에서 만들어짐                        
+5. 멤버변수 : 클래스 안에 선언되고 인스턴스가 생성될 당시에 만들어짐<-클래스 
 */
