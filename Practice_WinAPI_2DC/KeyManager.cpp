@@ -1,5 +1,5 @@
-#include "KeyManager.h"
 #include "framework.h"
+#include "KeyManager.h"
 
 KeyManager::KeyManager()//키매니저의 생성자를 정의합니다.
 {
@@ -14,7 +14,7 @@ KeyManager::~KeyManager()
 {
 }
 
-void KeyManager::update()
+void KeyManager::Update()
 {
 	//모든 키 사이즈의 만큼 반복하여 입력상태를 확인합니다.
 	for (int key = 0; key < VKEY_SIZE; key++)
@@ -30,7 +30,7 @@ void KeyManager::update()
 		}
 	}
 }
-void KeyManager::init()//여기는 생성자가 있으니까 없어도 되지 않을까?
+void KeyManager::Init()//여기는 생성자가 있으니까 없어도 되지 않을까?
 {
 }
 

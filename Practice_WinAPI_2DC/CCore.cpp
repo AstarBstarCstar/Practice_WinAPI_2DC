@@ -1,65 +1,109 @@
-#include "CCore.h"
 #include "framework.h"
-//TODO:
+#include "CCore.h"
+#include "GameObject.h"
+
+GameObject Obj;
+
 CCore::CCore()
 {
-	m_hDC = 0;//게임 화면 그리기 위한 DC 핸들값 초기화 시켜줌
+	m_hDC = 0;//게임 화면을 그리기 위한 DC 핸들값 초기화 시켜줍니다
 	//m_hMemDC = 0;
 	//m_hBMP = 0;
 }
 
 CCore::~CCore()
 {
+	/*게임 코어 종료 시점에 DC 핸들값 반납 소멸자영역입니다*/
 	ReleaseDC(hWnd, m_hDC);
 	DeleteObject(m_hMemDC);
 	DeleteObject(m_hBMP);
 }
 
-POINT g_rectPos;
-/*게임의 정보들 입력등 갱신해주기*/
-void CCore::update()
-{
-	TimeManager::getInst()->init();
 
-	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+/*게임의 정보들 입력등 갱신해주는 영역입니다*/
+void CCore::Update()
+{
+	TimeManager::getInst()->Update();
+	KeyManager::getInst()->Update();//TODO: 프레임 워크 extern 수정하니 갑자기 안되던게 잘 됨 이유 알아보기
+
+	fPoint pos = Obj.GetPos();
+	/*GetAsuncKeyState: 메시지 큐에 키 입력을 받는 방식이 아닌 현재 상태의 키 입력상태를 확인하는 함수입니다.*/
+	if (KeyManager::getInst()->GetButton(VK_LEFT))//TODO: GET 알아보기
 	{
-		g_rectPos.x -= 1 * TimeManager::getInst()->GetDT();
+		pos.x -= 100 * TimeManager::getInst()->GetDT();
 	}
-	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+
+	if (KeyManager::getInst()->GetButton(VK_RIGHT))
 	{
-		g_rectPos.x += 1 * TimeManager::getInst()->GetDT();
+		pos.x += 100 * TimeManager::getInst()->GetDT();
 	}
-	if (GetAsyncKeyState(VK_UP) & 0x8000)
+
+	if (KeyManager::getInst()->GetButton(VK_UP))
 	{
-		g_rectPos.y -= 1 * TimeManager::getInst()->GetDT();
+		pos.y += 100 * TimeManager::getInst()->GetDT();
 	}
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+
+	if (KeyManager::getInst()->GetButton(VK_DOWN))
 	{
-		g_rectPos.y += 1 * TimeManager::getInst()->GetDT();
+		pos.y -= 100 * TimeManager::getInst()->GetDT();
 	}
-	WCHAR strFPS[6];
-	swprintf_s(strFPS, L"%5d", TimeManager::getInst()->GetDT());
-	TextOutW(m_hDC, WINSIZEX - 50, 10, m_uiFPS);
+
+	Obj.SetPos(pos);
 }
 
 /*게임을 그려주는 영역*/
-void CCore::render()
+void CCore::Render()
 {
-	Rectangle(m_hMemDC,100, 100, 200, 200);//그리는거 메모리 디시에 저장
+	Rectangle(m_hMemDC, -1, -1, WINSIZEX + 1, WINSIZEY + 1);
+
+	Rectangle(m_hMemDC,
+		Obj.GetPos().x - Obj.GetScale().x / 2,
+		Obj.GetPos().y - Obj.GetScale().y / 2,
+		Obj.GetPos().x + Obj.GetScale().x / 2,
+		Obj.GetPos().x + Obj.GetScale().y / 2);
+
+	Rectangle(m_hMemDC,
+		Obj.GetPos().x - Obj.GetScale().x / 2+200,
+		Obj.GetPos().y - Obj.GetScale().y / 2,
+		Obj.GetPos().x + Obj.GetScale().x / 2+200,
+		Obj.GetPos().x + Obj.GetScale().y / 2);
+
+	Rectangle(m_hMemDC,
+		Obj.GetPos().x - Obj.GetScale().x / 2,
+		Obj.GetPos().y - Obj.GetScale().y / 2+200,
+		Obj.GetPos().x + Obj.GetScale().x / 2,
+		Obj.GetPos().x + Obj.GetScale().y / 2+200);
+
+	Rectangle(m_hMemDC,
+		Obj.GetPos().x - Obj.GetScale().x / 2+200,
+		Obj.GetPos().y - Obj.GetScale().y / 2+200,
+		Obj.GetPos().x + Obj.GetScale().x / 2+200,
+		Obj.GetPos().x + Obj.GetScale().y / 2+200);
+
+
+	/*오른쪽 상단에 프레임을 표시하는 코드입니다*/
+	WCHAR strFPS[6];
+
+	swprintf_s(strFPS, L"%5d", TimeManager::getInst()->GetFPS());
+	TextOutW(m_hMemDC, WINSIZEX - 50, 10, strFPS, 5);
+
 	BitBlt(m_hDC, 0, 0, WINSIZEX, WINSIZEY, m_hMemDC, 0, 0, SRCCOPY);
-	
 }
 
 /*코어를 초기화 하는 영역*/
-void CCore::init()
+void CCore::Init()
 {
+	TimeManager::getInst()->Init();
+	KeyManager::getInst()->Init();
+
 	m_hDC = GetDC(hWnd);
+
+	/*더블 버퍼링의 메모리 DC와 메모리 비트맵을 생성하는 코드입니다*/
 	m_hMemDC = CreateCompatibleDC(m_hDC);
 	m_hBMP = CreateCompatibleBitmap(m_hDC, WINSIZEX, WINSIZEY);
 
 	HBITMAP hOldBitmap = (HBITMAP)SelectObject(m_hMemDC, m_hBMP);
 	DeleteObject(hOldBitmap);
 
-	g_rectPos.x = 300;
-	g_rectPos.y = 300;
+	Obj = GameObject(fPoint(100, 100), fPoint(100, 100));
 }

@@ -1,5 +1,6 @@
-#include "TimeManager.h"
 #include "framework.h"
+#include "TimeManager.h"
+
 TimeManager::TimeManager()
 {
 	//m_llCurCount = {};
@@ -10,31 +11,37 @@ TimeManager::TimeManager()
 }
 TimeManager::~TimeManager()
 {
-
 }
 
-void TimeManager::update()
+void TimeManager::Update()
 {
-	static unsigned int updateCount = 0;
-	static double updateOneSec = 0;
+	static unsigned int UpdateCount = 0;
+	static double UpdateOneSec = 0;
 
 	QueryPerformanceCounter(&m_llCurCount);
-	/*이전 업데이트 카운트와 현재 업데이트 카운트 값의 차이를 구해서 
-	1초당 카운트 수로 나눠주면 
+	/*이전 업데이트 카운트와 현재 업데이트 카운트 값의 차이를 구해서
+	1초당 카운트 수로 나눠주면
 	업데이트 사이의 몇 초가 지났는지 알수 있음*/
-	m_dDt= (double)(m_llCurCount.QuadPart - m_llPrevCount.QuadPart) / m_llFreq.QuadPart;
-	m_llPrevCount = m_llCurCount;
-	++updateCount;
-	updateOneSec += m_dDT;
-	if (updateOneSec >= 1.0)
-	{
-		m_uiFPS = updateCount;
 
-		updateOneSec = 0;
-		updateCount = 0;
+	/*이전 프레임 카운팅과, 현재 프레임 카운티 값의 차이를 구합니다.*/
+	m_dDT = (double)(m_llCurCount.QuadPart - m_llPrevCount.QuadPart) / m_llFreq.QuadPart;
+
+	/*이전 프레임을 현재 프레임 카운팅 값으로 넣습니다.*/
+	m_llPrevCount = m_llCurCount;
+
+	++UpdateCount;
+	UpdateOneSec += m_dDT;
+
+	if (UpdateOneSec >= 1.0)
+	{
+		m_uiFPS = UpdateCount;
+
+		UpdateOneSec = 0;
+		UpdateCount = 0;
 	}
 }
-void TimeManager::init()
+
+void TimeManager::Init()
 {
 	QueryPerformanceCounter(&m_llPrevCount);		/*현재 시간의 카운트 수*/
 	QueryPerformanceFrequency(&m_llFreq);	/*1초당 진행하는 카운트 수*/

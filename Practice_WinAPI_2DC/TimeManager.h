@@ -12,8 +12,8 @@ private:
 	double			m_dDT; // Delta Time : 1프레임당 소요된 시간
 
 public:
-	void		 update();  /*한 업데이트당 fps,dt*/
-	void		 init();	/*timemanager 초기화시키기*/
+	void		 Update();  /*한 업데이트당 fps,dt*/
+	void		 Init();	/*timemanager 초기화시키기*/
 
 	unsigned int GetFPS();
 	double		 GetDT();

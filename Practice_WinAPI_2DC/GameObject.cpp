@@ -1,5 +1,5 @@
-#include "GameObject.h"
 #include "framework.h"
+#include "GameObject.h"
 
 /*TODO: 여기 using namespace std 없이 하려면 어떻게 하는지 궁굼하다*/
 GameObject::GameObject()
@@ -7,8 +7,8 @@ GameObject::GameObject()
 }
 GameObject::GameObject(fPoint pos, fPoint scale)
 {
-	b_Pos = pos;
-	b_Scale = scale;
+	m_fptPos = pos;
+	m_fptScale = scale;
 }
 GameObject::~GameObject()
 {
@@ -16,20 +16,20 @@ GameObject::~GameObject()
 
 void GameObject::SetPos(fPoint pos)
 {
-	b_Pos = pos;
+	m_fptPos = pos;
 }
 
 void GameObject::SetScale(fPoint scale)
 {
-	b_Scale = scale;
+	m_fptScale = scale;
 }
 
 fPoint GameObject::GetPos()
 {
-	return b_Pos;
+	return m_fptPos;
 }
 
 fPoint GameObject::GetScale()
 {
-	return b_Scale;
+	return m_fptScale;
 }

@@ -2,8 +2,8 @@
 class GameObject
 {
 private:
-	fPoint b_Pos;
-	fPoint b_Scale;
+	fPoint m_fptPos;
+	fPoint m_fptScale;
 public:
 	GameObject();
 	GameObject(fPoint pos, fPoint scale);

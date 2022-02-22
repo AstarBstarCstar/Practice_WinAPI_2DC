@@ -12,8 +12,8 @@ private:
 	HBITMAP		m_hBMP;		//메모리 비트맵
 
 public:
-	void update();/*게임 상황 입력 출력 등등 계속 업데이트 */
-	void render();/*게임 상황 계속 그려주는 부분*/
-	void init();/*초기화 과정*/
+	void Update();/*게임 상황 입력 출력 등등 계속 업데이트 */
+	void Render();/*게임 상황 계속 그려주는 부분*/
+	void Init();/*초기화 과정*/
 };
 

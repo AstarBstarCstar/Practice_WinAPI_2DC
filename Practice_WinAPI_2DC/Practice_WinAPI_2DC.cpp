@@ -8,7 +8,7 @@
 
 // 전역 변수:
 HINSTANCE hInst;                                // 현재 인스턴스입니다. 프로그램에 대한 시작 핸들값
-HWND hWnd; //<- 나 븅신이야? 이걸 왜 안썻대?
+HWND hWnd;                          //<-왜인지 모르겠는데 얘를 안써서(누락되서) 한참 쩔쩔매다 해결됨
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다. 타이틀       옆 변수들은 typedef로 변수 이름 바꾼것
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다. 이름
 
@@ -34,7 +34,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,           /*hInstance : 실행�
 
     // TODO: 여기에 코드를 입력합니다.
 
-    /*TODO:리소스 뷰의 string table 용도*/
+    /*리소스 뷰의 string table 용도*/
     // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_PRACTICEWINAPI2DC, szWindowClass, MAX_LOADSTRING);
@@ -53,7 +53,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,           /*hInstance : 실행�
     //     /*이부분은 GetMessage 부분 픽메세지로 바꿨으니 한번 참고할것*/
     //    // 기본 메시지 루프입니다:
     //    /*여기서 메시지 큐에서 메시지가 확인 될 때까지 대기(무한루프)*/
-    //    /*TODO:메시지 큐에 msg.message == WM_QUIT 인 경우 false를 반환한다*/
+    //    /*메시지 큐에 msg.message == WM_QUIT 인 경우 false를 반환한다*/
     //    while (GetMessage(&msg, nullptr, 0, 0))//GetMessage : 메시지 큐에 메시지가 없으면 대기함. 메시지가 들어왔다면 True 를 반환
     //    {                                     /*PeekMessage : 메시지 큐에 메시지가 없다면 false, 있다면 true 반환*/
     //        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg)) //TranslateAccelerator : 단축키 대한 처리
@@ -66,7 +66,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,           /*hInstance : 실행�
     //    return (int) msg.wParam;
     //}
 
-    CCore::getInst()->init();
+    CCore::getInst()->Init();
 
     /*픽메세지를 통해 게임 처리 가능*/
     MSG msg; /*GetMessage -> PeekMessage 로 바꿈  !!!중요!!!*/
@@ -89,6 +89,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,           /*hInstance : 실행�
             게임 처리
             게임 업데이트
             게임 그려주기*/
+            CCore::getInst()->Update();
+            CCore::getInst()->Render();
         }
     }
 
@@ -165,14 +167,14 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    AdjustWindowRect(&rc, WINSTYLE, false);
 
    /*위 RECT정보로 윈도우 사이즈를 세팅*/
-   SetWindowPos(hWnd, NULL, WINSTARTX, WINSTARTY, (rc.right - rc.left), (rc.bottom - rc.top), SWP_NOZORDER | SWP_NOMOVE); //TODO::여기 뭔소린지 모르겠다 당최
+   SetWindowPos(hWnd, NULL, WINSTARTX, WINSTARTY, (rc.right - rc.left), (rc.bottom - rc.top), SWP_NOZORDER | SWP_NOMOVE); 
 
    ShowWindow(hWnd, nCmdShow);  //윈도우 보여주기
    UpdateWindow(hWnd);          //윈도우 업데이트 하기
 
    return TRUE;
 }
-/*TODO:여기 뭔소린지 모르겠다
+/*
 WndPrc : 메시지를 운영체제에 전달함. 강제로 운영체제가 호출함.
 hWnd : 메시지가 어느 윈도우를 대상으로 전달되었는지 구분한다.
 message : 메시지 구분번호
@@ -189,10 +191,6 @@ lParam : unsigned long 메시지의 매개변수 2
 //  WM_DESTROY  - 종료 메시지를 게시하고 반환합니다.
 //
 //
-const int g_rectXSize = 50;
-const int g_rectYSize = 100;
-
-POINT g_rectPos = { 500,500 };
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -216,7 +214,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         break;
 
-    case WM_PAINT://윈도우의 작업영역이 다시 그려져야 할 때 실행됨 (무효화영역 발생시 실행? TODO:뭔소리?)
+    case WM_PAINT://윈도우의 작업영역이 다시 그려져야 할 때 실행됨 (무효화영역 발생시 실행?
     {
         PAINTSTRUCT ps;
         /*Device Context 만들어서 ID를 반환*/

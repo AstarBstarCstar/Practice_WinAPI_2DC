@@ -13,15 +13,15 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
+#include <string>
 
 /*STL*/
-#include <string>
 #include <vector>
 
 /*헤더선언*/
+#include "SingleTon.h"
 #include "TimeManager.h"
 #include "CCore.h"
-#include "SingleTon.h"
 #include "Struct.h"
 #include "KeyManager.h"
 
@@ -37,8 +37,8 @@ using namespace std;
 
 
 /*전역변수 선언 (instance,handle)*/
-extern HINSTANCE m_hInstance;	 /*어딘가에 이 변수가 있을거니까 그거 써도된다 의미(extern:외부변수) 함수로 치면 전방선언*/
-extern HWND m_hWnd;              /*어딘가에 이 변수가 있을거니까 그거 써도된다 의미(extern:외부변수)*/
+extern HINSTANCE hInst;	 /*어딘가에 이 변수가 있을거니까 그거 써도된다 의미(extern:외부변수) 함수로 치면 전방선언*/
+extern HWND hWnd;              /*어딘가에 이 변수가 있을거니까 그거 써도된다 의미(extern:외부변수)*/
 
 /*
 1. 지역변수 : 함수 내에서 만들어짐		
