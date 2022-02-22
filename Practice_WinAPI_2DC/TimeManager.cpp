@@ -43,7 +43,7 @@ void TimeManager::Update()
 
 void TimeManager::Init()
 {
-	QueryPerformanceCounter(&m_llPrevCount);		/*현재 시간의 카운트 수*/
+	QueryPerformanceCounter(&m_llCurCount);		/*현재 시간의 카운트 수*/    //SOLVED: 여기를 현재 카운트가 아닌 이전 카운트로 썼어서, 에러가 났었음.
 	QueryPerformanceFrequency(&m_llFreq);	/*1초당 진행하는 카운트 수*/
 }
 unsigned int TimeManager::GetFPS()

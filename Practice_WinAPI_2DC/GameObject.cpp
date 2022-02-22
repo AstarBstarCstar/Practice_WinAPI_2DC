@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "GameObject.h"
 
-/*TODO: 여기 using namespace std 없이 하려면 어떻게 하는지 궁굼하다*/
+/*UNKNOWN: 여기 using namespace std 없이 하려면 어떻게 하는지 궁굼하다*/
 GameObject::GameObject()
 {
 }

@@ -10,7 +10,7 @@
 HINSTANCE hInst;                                // 현재 인스턴스입니다. 프로그램에 대한 시작 핸들값
 HWND hWnd;                          //<-왜인지 모르겠는데 얘를 안써서(누락되서) 한참 쩔쩔매다 해결됨
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다. 타이틀       옆 변수들은 typedef로 변수 이름 바꾼것
-WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다. 이름
+WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다. 
 
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
@@ -85,10 +85,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,           /*hInstance : 실행�
         }
         else
         {
-            /*
-            게임 처리
-            게임 업데이트
-            게임 그려주기*/
             CCore::getInst()->Update();
             CCore::getInst()->Render();
         }
@@ -139,9 +135,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
-   HWND hWnd = CreateWindowW(szWindowClass,       //클래스의 이름
+   hWnd = CreateWindowW(//UNKNOWN:  HWND hWnd  를 HWND를 지우고 hWnd만 적으니 창 두개가 사라지고 잘 나오는 이유? 아마도 extern을 했엇으니 또해서 그런듯?
+                            szWindowClass,       //클래스의 이름 
                              szTitle,             //윈도우 타이틀 이름
-                             WINSTYLE,            //윈도우 스타일, TODO:내부 뜯어서 보여주기
+                             WINSTYLE,            //윈도우 스타일, 내부 뜯어서 보여주기
                              WINSTARTX,           //윈도우 화면의 X축
                              WINSTARTY,           //윈도우 화면의 Y축
                              WINSIZEX,            //가로 크기
@@ -235,24 +232,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         EndPaint(hWnd, &ps);/**/
     }
         break;
-    //case WM_KEYDOWN://키다운 발생시 이쪽 실행
-    //    switch (wParam)
-    //    {
-    //    case VK_LEFT:
-    //        g_rectPos.x -= 10;
-    //        break;
-    //    case VK_RIGHT:
-    //        g_rectPos.x += 10;
-    //        break;
-    //    case VK_UP:
-    //        g_rectPos.y -= 10;
-    //        break;
-    //    case VK_DOWN:
-    //        g_rectPos.y += 10;
-    //        break;
-    //    }
-    //    InvalidateRect(hWnd, NULL, false);/*TODO: 이거 무슨소리지?*/
-    //    break;
 
     case WM_DESTROY:/*윈도우 종료시 실행*/
         PostQuitMessage(0);/*메시지큐 뒤에 WM_QUIT 입력*/

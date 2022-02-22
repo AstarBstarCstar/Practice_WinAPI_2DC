@@ -25,6 +25,9 @@
     <Filter Include="Engine\Managers">
       <UniqueIdentifier>{90d75259-99f6-42b1-9348-365ade9a54fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Objects">
+      <UniqueIdentifier>{b2388ad0-42e4-491c-9047-2f3af82eb24c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -51,11 +54,11 @@
     <ClInclude Include="KeyManager.h">
       <Filter>Engine\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="TimeManager.h">
       <Filter>Engine\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Engine\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -68,11 +71,11 @@
     <ClCompile Include="KeyManager.cpp">
       <Filter>Engine\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="TimeManager.cpp">
       <Filter>Engine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Engine\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

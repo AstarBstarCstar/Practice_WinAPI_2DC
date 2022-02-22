@@ -16,11 +16,22 @@ KeyManager::~KeyManager()
 
 void KeyManager::Update()
 {
+	/*겟포커스 함수를 이용하여, 현재 윈도우인지 확인하고, 아니면 모든 키입력을 해제합니다.*/
+	HWND thisWnd = GetFocus();
+	if (thisWnd != hWnd)
+	{
+		for (int key = 0; key < VKEY_SIZE; key++)
+		{
+			m_arrPrevKey[key] = m_arrCurKey[key];
+			m_arrCurKey[key] = false;
+		}
+		return;
+	}
 	//모든 키 사이즈의 만큼 반복하여 입력상태를 확인합니다.
 	for (int key = 0; key < VKEY_SIZE; key++)
 	{
 		m_arrPrevKey[key] = m_arrCurKey[key];
-		if (GetAsyncKeyState(key) & 0x8000)//TODO:이부분 정말로 모르겠음.
+		if (GetAsyncKeyState(key) & 0x8000)//UNKNOWN:이부분 정말로 모르겠음. 키 눌렸는지 안눌렸는지의 함수 쓰는건 알겠는데, &0x8000 이부분이 이해가 안 감.
 		{
 			m_arrCurKey[key] = true;
 		}
@@ -30,7 +41,7 @@ void KeyManager::Update()
 		}
 	}
 }
-void KeyManager::Init()//여기는 생성자가 있으니까 없어도 되지 않을까?
+void KeyManager::Init()
 {
 }
 

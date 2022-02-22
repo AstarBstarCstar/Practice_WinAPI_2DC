@@ -6,7 +6,7 @@ GameObject Obj;
 
 CCore::CCore()
 {
-	m_hDC = 0;//게임 화면을 그리기 위한 DC 핸들값 초기화 시켜줍니다
+	m_hDC = 0;//게임 화면을 그리기 위한 DC 핸들값을 초기화 시켜줍니다
 	//m_hMemDC = 0;
 	//m_hBMP = 0;
 }
@@ -24,34 +24,34 @@ CCore::~CCore()
 void CCore::Update()
 {
 	TimeManager::getInst()->Update();
-	KeyManager::getInst()->Update();//TODO: 프레임 워크 extern 수정하니 갑자기 안되던게 잘 됨 이유 알아보기
+	KeyManager::getInst()->Update();//UNKNOWN: 프레임 워크 extern 수정하니 갑자기 안되던게 잘 됨 이유 알아보기
 
 	fPoint pos = Obj.GetPos();
 	/*GetAsuncKeyState: 메시지 큐에 키 입력을 받는 방식이 아닌 현재 상태의 키 입력상태를 확인하는 함수입니다.*/
-	if (KeyManager::getInst()->GetButton(VK_LEFT))//TODO: GET 알아보기
+	if (KeyManager::getInst()->GetButton(VK_LEFT))//UNKNOWN: GET 알아보기
 	{
-		pos.x -= 100 * TimeManager::getInst()->GetDT();
+		pos.x -= 500 * TimeManager::getInst()->GetDT();
 	}
 
 	if (KeyManager::getInst()->GetButton(VK_RIGHT))
 	{
-		pos.x += 100 * TimeManager::getInst()->GetDT();
+		pos.x += 500 * TimeManager::getInst()->GetDT();
 	}
 
 	if (KeyManager::getInst()->GetButton(VK_UP))
 	{
-		pos.y += 100 * TimeManager::getInst()->GetDT();
+		pos.y -= 500 * TimeManager::getInst()->GetDT();
 	}
 
 	if (KeyManager::getInst()->GetButton(VK_DOWN))
 	{
-		pos.y -= 100 * TimeManager::getInst()->GetDT();
+		pos.y += 500 * TimeManager::getInst()->GetDT();
 	}
 
 	Obj.SetPos(pos);
 }
 
-/*게임을 그려주는 영역*/
+/*게임을 그려주는 영역입니다*/
 void CCore::Render()
 {
 	Rectangle(m_hMemDC, -1, -1, WINSIZEX + 1, WINSIZEY + 1);
@@ -105,5 +105,5 @@ void CCore::Init()
 	HBITMAP hOldBitmap = (HBITMAP)SelectObject(m_hMemDC, m_hBMP);
 	DeleteObject(hOldBitmap);
 
-	Obj = GameObject(fPoint(100, 100), fPoint(100, 100));
+	Obj = GameObject(fPoint(100, 100), fPoint( 100, 100 ));
 }
