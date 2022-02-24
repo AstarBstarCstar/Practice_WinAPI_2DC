@@ -1,2 +1,2 @@
 # Practice_WinAPI_2DC
-Windows API 2D Copy Practice
+문상돈_Windows API 2D Copy Practice
