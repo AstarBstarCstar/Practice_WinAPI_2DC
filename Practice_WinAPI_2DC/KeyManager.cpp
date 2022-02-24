@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "KeyManager.h"
 
+
 KeyManager::KeyManager()//키매니저의 생성자를 정의합니다.
 {
 	for (int key = 0; key < VKEY_SIZE; key++)//모든 키값을 눌리지 않은 상태로 초기화 합니다.

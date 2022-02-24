@@ -39,3 +39,36 @@ fPoint GameObject::GetScale()
 {
 	return m_fptScale;
 }
+
+void GameObject::Update()
+{
+	/*UNKNOWN:pos를 m_fptpos로 바꿔야 하는 이유 알아보기*/
+	if (KeyManager::GetInst()->GetButton(VK_LEFT))
+	{
+		m_fptPos.x -= 500 * TimeManager::GetInst()->GetDT();
+	}
+
+	if (KeyManager::GetInst()->GetButton(VK_RIGHT))
+	{
+		m_fptPos.x += 500 * TimeManager::GetInst()->GetDT();
+	}
+
+	if (KeyManager::GetInst()->GetButton(VK_UP))
+	{
+		m_fptPos.y -= 500 * TimeManager::GetInst()->GetDT();
+	}
+
+	if (KeyManager::GetInst()->GetButton(VK_DOWN))
+	{
+		m_fptPos.y += 500 * TimeManager::GetInst()->GetDT();
+	}
+}
+
+void GameObject::Render(HDC hDC)
+{
+	Rectangle(hDC,
+		m_fptPos.x - m_fptScale.x / 2,
+		m_fptPos.y - m_fptScale.y / 2,
+		m_fptPos.x + m_fptScale.x / 2,
+		m_fptPos.y + m_fptScale.y / 2);
+}

@@ -11,7 +11,14 @@ private:
 public:
 	/*생성자와 소멸자 입니다*/
 	Scene();
-	~Scene();
+	virtual	~Scene();//가상함수 추가
+
+	/*코어에 있던 업데이트와 렌더 함수를 Scene에 구현합니다.*/
+	virtual void Update();
+	virtual void Render(HDC hDC);
+	
+	virtual void Enter() = 0;//해당 함수는 해당 씬에 진입시 호출됩니다.
+	virtual void Exit() = 0;//해당 함수는 해당 씬에서 탈출할 시 호출됩니다.
 
 	void SetName(const wstring& name);
 	wstring GetName();

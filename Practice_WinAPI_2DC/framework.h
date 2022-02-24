@@ -18,15 +18,6 @@
 /*STL*/
 #include <vector>
 
-/*헤더선언*/
-#include "SingleTon.h"
-#include "TimeManager.h"
-#include "CCore.h"
-#include "Struct.h"
-#include "KeyManager.h"
-
-using namespace std;
-
 /*:::DEFINE문:::*/
 #define	WINSTARTX	100
 #define	WINSTARTY	100
@@ -34,6 +25,8 @@ using namespace std;
 #define	WINSIZEY	720//y해상도
 #define	WINSTYLE	WS_CAPTION|WS_SYSMENU|WS_MINIMIZEBOX //잘 모르겠지만 아마도 우측 상단 메뉴 구성인듯
 
+
+/*열거형 클래스*/
 enum class ENUM_GAMEOBJ//ENUM_GAMEOBJ를 열거형 클래스로 선언합니다.
 {
 	DEFAULT,
@@ -41,7 +34,15 @@ enum class ENUM_GAMEOBJ//ENUM_GAMEOBJ를 열거형 클래스로 선언합니다.
 
 	SIZE
 };
+enum class ENUM_SCENE//열거형 클래스로 ENUM_SCENE을 선언합니다.
+{
+	TOOL,
+	START,
+	STAGE_1,
+	STAGE_2,
 
+	SIZE
+};
 
 /*전역변수 선언 (instance,handle)*/
 extern HINSTANCE hInst;	 /*어딘가에 이 변수가 있을거니까 그거 써도된다 의미(extern:외부변수) 함수로 치면 전방선언*/
@@ -53,3 +54,14 @@ extern HWND hWnd;              /*어딘가에 이 변수가 있을거니까 그�
 4. 외부변수 : 다른 곳에서 만들어짐                        
 5. 멤버변수 : 클래스 안에 선언되고 인스턴스가 생성될 당시에 만들어짐<-클래스 
 */
+
+/*헤더선언부*/ 
+//UNKNOWN:헤더선언을 아래로 내렸더니 오류가 사라진 이유 알아보기 (당시 열거형 클래스보다 위에 선언되어있었음.)
+#include "SingleTon.h"
+#include "TimeManager.h"
+#include "CCore.h"
+#include "Struct.h"
+#include "KeyManager.h"
+#include "SceneManager.h"
+
+using namespace std;
