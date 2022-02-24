@@ -23,31 +23,31 @@ CCore::~CCore()
 /*게임의 정보들 입력등 갱신해주는 영역입니다*/
 void CCore::Update()
 {
-	TimeManager::getInst()->Update();
-	KeyManager::getInst()->Update();//UNKNOWN: 프레임 워크 extern 수정하니 갑자기 안되던게 잘 됨 이유 알아보기
+	KeyManager::GetInst()->Update();
+	TimeManager::GetInst()->Update();
+	//UNKNOWN: 프레임 워크 extern 수정하니 갑자기 안되던게 잘 됨 이유 알아보기
 
 	fPoint pos = Obj.GetPos();
 	/*GetAsuncKeyState: 메시지 큐에 키 입력을 받는 방식이 아닌 현재 상태의 키 입력상태를 확인하는 함수입니다.*/
-	if (KeyManager::getInst()->GetButton(VK_LEFT))//UNKNOWN: GET 알아보기
-	{
-		pos.x -= 500 * TimeManager::getInst()->GetDT();
+	if (KeyManager::GetInst()->GetButton(VK_LEFT))
+	{/*SOLVED:사각형 이상하게 움직이는 건에 대해서 타임 함수는 문제가 없음(확인)*/
+		pos.x -= 5000 * TimeManager::GetInst()->GetDT();
 	}
 
-	if (KeyManager::getInst()->GetButton(VK_RIGHT))
+	if (KeyManager::GetInst()->GetButton(VK_RIGHT))
 	{
-		pos.x += 500 * TimeManager::getInst()->GetDT();
+		pos.x += 5000 * TimeManager::GetInst()->GetDT();
 	}
 
-	if (KeyManager::getInst()->GetButton(VK_UP))
+	if (KeyManager::GetInst()->GetButton(VK_UP))
 	{
-		pos.y -= 500 * TimeManager::getInst()->GetDT();
+		pos.y -= 5000 * TimeManager::GetInst()->GetDT();
 	}
 
-	if (KeyManager::getInst()->GetButton(VK_DOWN))
+	if (KeyManager::GetInst()->GetButton(VK_DOWN))
 	{
-		pos.y += 500 * TimeManager::getInst()->GetDT();
+		pos.y += 5000 * TimeManager::GetInst()->GetDT();
 	}
-
 	Obj.SetPos(pos);
 }
 
@@ -60,31 +60,31 @@ void CCore::Render()
 		Obj.GetPos().x - Obj.GetScale().x / 2,
 		Obj.GetPos().y - Obj.GetScale().y / 2,
 		Obj.GetPos().x + Obj.GetScale().x / 2,
-		Obj.GetPos().x + Obj.GetScale().y / 2);
+		Obj.GetPos().y + Obj.GetScale().y / 2);
 
 	Rectangle(m_hMemDC,
-		Obj.GetPos().x - Obj.GetScale().x / 2+200,
+		Obj.GetPos().x - Obj.GetScale().x / 2 + 200,
 		Obj.GetPos().y - Obj.GetScale().y / 2,
-		Obj.GetPos().x + Obj.GetScale().x / 2+200,
-		Obj.GetPos().x + Obj.GetScale().y / 2);
+		Obj.GetPos().x + Obj.GetScale().x / 2 + 200,
+		Obj.GetPos().y + Obj.GetScale().y / 2);
 
 	Rectangle(m_hMemDC,
 		Obj.GetPos().x - Obj.GetScale().x / 2,
-		Obj.GetPos().y - Obj.GetScale().y / 2+200,
+		Obj.GetPos().y - Obj.GetScale().y / 2 + 200,
 		Obj.GetPos().x + Obj.GetScale().x / 2,
-		Obj.GetPos().x + Obj.GetScale().y / 2+200);
+		Obj.GetPos().y + Obj.GetScale().y / 2 + 200);
 
 	Rectangle(m_hMemDC,
-		Obj.GetPos().x - Obj.GetScale().x / 2+200,
-		Obj.GetPos().y - Obj.GetScale().y / 2+200,
-		Obj.GetPos().x + Obj.GetScale().x / 2+200,
-		Obj.GetPos().x + Obj.GetScale().y / 2+200);
+		Obj.GetPos().x - Obj.GetScale().x / 2 + 200,
+		Obj.GetPos().y - Obj.GetScale().y / 2 + 200,
+		Obj.GetPos().x + Obj.GetScale().x / 2 + 200,
+		Obj.GetPos().y + Obj.GetScale().y / 2 + 200);
 
 
 	/*오른쪽 상단에 프레임을 표시하는 코드입니다*/
 	WCHAR strFPS[6];
 
-	swprintf_s(strFPS, L"%5d", TimeManager::getInst()->GetFPS());
+	swprintf_s(strFPS, L"%5d", TimeManager::GetInst()->GetFPS());
 	TextOutW(m_hMemDC, WINSIZEX - 50, 10, strFPS, 5);
 
 	BitBlt(m_hDC, 0, 0, WINSIZEX, WINSIZEY, m_hMemDC, 0, 0, SRCCOPY);
@@ -93,8 +93,8 @@ void CCore::Render()
 /*코어를 초기화 하는 영역*/
 void CCore::Init()
 {
-	TimeManager::getInst()->Init();
-	KeyManager::getInst()->Init();
+	TimeManager::GetInst()->Init();
+	KeyManager::GetInst()->Init();
 
 	m_hDC = GetDC(hWnd);
 

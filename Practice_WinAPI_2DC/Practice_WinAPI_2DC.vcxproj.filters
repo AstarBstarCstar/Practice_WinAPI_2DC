@@ -60,6 +60,9 @@
     <ClInclude Include="GameObject.h">
       <Filter>Engine\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Engine\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Practice_WinAPI_2DC.cpp">
@@ -75,6 +78,9 @@
       <Filter>Engine\Managers</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
+      <Filter>Engine\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
       <Filter>Engine\Objects</Filter>
     </ClCompile>
   </ItemGroup>

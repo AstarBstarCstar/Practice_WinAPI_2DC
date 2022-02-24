@@ -45,6 +45,7 @@ void KeyManager::Init()
 {
 }
 
+/*각각 버튼이 눌렸는지, 버튼이 떼졌는지, 버튼이 눌려졌는지에 대한 함수입니다.*/
 bool KeyManager::GetButton(const int key)
 {
 	return (true == m_arrCurKey[key] &&

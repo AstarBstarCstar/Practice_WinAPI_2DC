@@ -34,12 +34,18 @@ using namespace std;
 #define	WINSIZEY	720//y해상도
 #define	WINSTYLE	WS_CAPTION|WS_SYSMENU|WS_MINIMIZEBOX //잘 모르겠지만 아마도 우측 상단 메뉴 구성인듯
 
+enum class ENUM_GAMEOBJ//ENUM_GAMEOBJ를 열거형 클래스로 선언합니다.
+{
+	DEFAULT,
+	PLAYER,
+
+	SIZE
+};
 
 
 /*전역변수 선언 (instance,handle)*/
 extern HINSTANCE hInst;	 /*어딘가에 이 변수가 있을거니까 그거 써도된다 의미(extern:외부변수) 함수로 치면 전방선언*/
 extern HWND hWnd;              /*어딘가에 이 변수가 있을거니까 그거 써도된다 의미(extern:외부변수)*/
-
 /*
 1. 지역변수 : 함수 내에서 만들어짐		
 2. 전역변수 : 함수 외부 전역에서 만들어짐					<-데이터 영역에 저장되며 프로그램 시작부터 끝까지 존재함.

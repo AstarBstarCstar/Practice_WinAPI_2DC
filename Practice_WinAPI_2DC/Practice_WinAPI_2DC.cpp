@@ -1,6 +1,5 @@
 ﻿// Practice_WinAPI_2DC.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
-
 #include "framework.h"
 #include "Practice_WinAPI_2DC.h"
 
@@ -66,8 +65,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,           /*hInstance : 실행�
     //    return (int) msg.wParam;
     //}
 
-    CCore::getInst()->Init();
 
+    CCore::GetInst()->Init();
     /*픽메세지를 통해 게임 처리 가능*/
     MSG msg; /*GetMessage -> PeekMessage 로 바꿈  !!!중요!!!*/
     while (1)/*이전 메시지 대기 상태 유지에서 현재 픽메세지의 메시지가 없는 99.99% 상황에서 게임 상황을 처리함*/
@@ -85,8 +84,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,           /*hInstance : 실행�
         }
         else
         {
-            CCore::getInst()->Update();
-            CCore::getInst()->Render();
+            CCore::GetInst()->Update();
+            CCore::GetInst()->Render();
         }
     }
 
@@ -164,7 +163,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    AdjustWindowRect(&rc, WINSTYLE, false);
 
    /*위 RECT정보로 윈도우 사이즈를 세팅*/
-   SetWindowPos(hWnd, NULL, WINSTARTX, WINSTARTY, (rc.right - rc.left), (rc.bottom - rc.top), SWP_NOZORDER | SWP_NOMOVE); 
+   SetWindowPos(hWnd, NULL, WINSTARTX, WINSTARTY, (rc.right - rc.left), (rc.bottom - rc.top), SWP_NOZORDER | SWP_NOMOVE);
 
    ShowWindow(hWnd, nCmdShow);  //윈도우 보여주기
    UpdateWindow(hWnd);          //윈도우 업데이트 하기

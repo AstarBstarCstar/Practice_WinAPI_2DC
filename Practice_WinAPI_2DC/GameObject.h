@@ -1,9 +1,11 @@
 #pragma once
 class GameObject
 {
+
 private:
 	fPoint m_fptPos;
 	fPoint m_fptScale;
+
 public:
 	GameObject();
 	GameObject(fPoint pos, fPoint scale);
