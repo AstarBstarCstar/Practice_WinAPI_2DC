@@ -43,18 +43,6 @@ void Scene::Render(HDC hDC)/* 모든 배열, 벡터를 돌면서 렌더 해주는 함수입니다.*/
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 void Scene::SetName(const wstring& name)//wstring의 name 의 '번지값을' StrName에 넣어줍니다.
 {
 	StrName = name;

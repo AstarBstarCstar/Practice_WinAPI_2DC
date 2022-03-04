@@ -28,6 +28,18 @@
     <Filter Include="Engine\Objects">
       <UniqueIdentifier>{b2388ad0-42e4-491c-9047-2f3af82eb24c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Scene">
+      <UniqueIdentifier>{8f37b6c6-e45c-4484-9b7a-45264117fd56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Objects\Player">
+      <UniqueIdentifier>{a108db38-f204-4f88-a14f-ffec2686afbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Objects\Monster">
+      <UniqueIdentifier>{2012289b-6d2d-41ca-9918-28141da4db52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Objects\Bullet">
+      <UniqueIdentifier>{0473f903-a4c5-4bd1-becf-6ba03c6ac202}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -69,6 +81,15 @@
     <ClInclude Include="SceneStart.h">
       <Filter>Engine\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Engine\Objects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Engine\Objects\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Engine\Objects\Bullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Practice_WinAPI_2DC.cpp">
@@ -95,6 +116,15 @@
     <ClCompile Include="SceneStart.cpp">
       <Filter>Engine\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Engine\Objects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Engine\Objects\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Engine\Objects\Bullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Practice_WinAPI_2DC.rc">
@@ -108,5 +138,9 @@
     <Image Include="Practice_WinAPI_2DC.ico">
       <Filter>리소스 파일</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,4 @@
 /*싱글톤 매크로 정의*/
-//진짜 개좆같네 싱글톤 문제 있는줄 알고 한참 찾아다니고 아예 복붙해도 안되길래 답없다 했는데 씨빨 SINGLETON을 씨빨 SINGLETONE으로 쓰냥ㅁㄴ이;ㅏㅁㅇ
 #define SINGLETON(type)			\
 													\
 public:											\
@@ -9,11 +8,13 @@ public:											\
 		return &_Instance;				\
 	}												\
 private:											\
-	type();										\
+	  type();									\
 	~type();										
-
 /*static 정적 영역에 할당한다 <- static은 프로그램 시작할 때 만들어 진다
-잘 모르겠다면 SINGLETON: 하나만  가질수 있는 얘 정도로 기억하자*/
+SINGLETON: 하나만  가질수 있는 얘 !기억하자*/
+
+
+
 
 
 
