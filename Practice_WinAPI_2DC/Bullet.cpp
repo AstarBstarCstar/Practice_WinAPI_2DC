@@ -12,11 +12,13 @@ Bullet::~Bullet()
 
 void Bullet::Update()
 {
-	fPoint Pos = GetPos();
 
-	Pos.y += 1000.f * (float)m_fDir * fDT;
+		fPoint Pos = GetPos();
 
-	SetPos(Pos);
+		Pos.y += 1000.f * (float)m_fDir * fDT;
+
+		SetPos(Pos);
+
 }
 
 void Bullet::Render(HDC _dc)

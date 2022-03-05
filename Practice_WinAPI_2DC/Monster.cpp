@@ -1,8 +1,16 @@
 #include "framework.h"
 #include "Monster.h"
+#include "Bullet.h"
+#include "Scene.h"
+#include <time.h>
+#include <stdlib.h>
+
+
+class Scene;
 
 Monster::Monster()
 {
+	srand(time(NULL));
 	m_fCenterPos = (fPoint(0.f, 0.f));
 	m_fSpeed = 300.f;
 	m_fMaxDis = 500.f;
@@ -26,7 +34,26 @@ void Monster::Update()
 		m_iDir *= (-1);
 		CurPos.x += f_Dist * m_iDir;//값이 초과했을 시 보정해주는 함수입니다.
 	}
-
-
 	SetPos(CurPos);								//변경된 값을 SetPos 해줍니다.
+
+	int shoot = rand() % 1000 + 1;
+	if (shoot >= 999)
+	{ 
+		ShootBullet();
+	}
+}
+
+void Monster::ShootBullet()
+{
+	
+	fPoint vShootBullet = GetPos();
+	vShootBullet.y -= GetScale().y / 2.f;//TODO:몬스터 총알 랜덤으로 쏘게하기, 연산자 재정의 시전
+
+	Bullet* pMBullet = new Bullet;
+	pMBullet->SetPos(vShootBullet);
+	pMBullet->SetScale(fPoint(10.f, 20.f));
+	pMBullet->SetDir(0);
+
+	Scene* MonScene = SceneManager::GetInst()->GetCurScene();
+	MonScene->AddObj(pMBullet, ENUM_GAMEOBJ::BULLET);
 }

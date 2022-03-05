@@ -18,6 +18,7 @@ public:
 	void SetSpeed(float speed) { this->m_fSpeed = speed; }
 
 	void SetCenterPos(fPoint pos) { this->m_fCenterPos = pos; }
+	void ShootBullet();
 
 
 	virtual void Update();
