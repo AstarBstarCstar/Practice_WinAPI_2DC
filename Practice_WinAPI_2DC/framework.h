@@ -14,6 +14,7 @@
 #include <memory.h>
 #include <tchar.h>
 #include <string>
+#include <math.h>
 
 /*STL*/
 #include <vector>
@@ -25,10 +26,12 @@ using namespace std;
 #define	WINSIZEX	1280//x해상도
 #define	WINSIZEY	720//y해상도
 #define	WINSTYLE	WS_CAPTION|WS_SYSMENU|WS_MINIMIZEBOX //잘 모르겠지만 아마도 우측 상단 메뉴 구성인듯
+#define PI			3.1415926535f
 
 #define	fDT			TimeManager::GetInst()->GetDT();
 
 #define KEY_STATE KeyManager::GetInst()->
+
 
 
 

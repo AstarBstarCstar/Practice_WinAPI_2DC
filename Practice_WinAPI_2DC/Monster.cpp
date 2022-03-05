@@ -52,7 +52,7 @@ void Monster::ShootBullet()
 	Bullet* pMBullet = new Bullet;
 	pMBullet->SetPos(vShootBullet);
 	pMBullet->SetScale(fPoint(10.f, 20.f));
-	pMBullet->SetDir(0);
+	pMBullet->SetVec(fPoint(0, 1));
 
 	Scene* MonScene = SceneManager::GetInst()->GetCurScene();
 	MonScene->AddObj(pMBullet, ENUM_GAMEOBJ::BULLET);

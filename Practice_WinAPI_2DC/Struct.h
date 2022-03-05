@@ -11,6 +11,7 @@ struct fPoint
 {
 	float x;
 	float y;
+public:
 	fPoint()
 	{
 		x = 0;
@@ -21,6 +22,24 @@ struct fPoint
 		this->x = x;
 		this->y = y;
 	}
+
+	float Length()
+	{
+		return sqrt(x * x + y * y);//sqrt = 제곱근 함수
+	}
+
+	fPoint& Nomalize()//벡터의 정규화
+	{
+		float fLen = Length();
+		assert(fLen != 0.f);
+
+			x = x / fLen;
+			y = y / fLen;
+			x, y;
+			return *this;
+	}
+
+
 	/*:::연산자 재정의부:::*/
 	fPoint& operator=(const fPoint& other)
 	{
@@ -48,7 +67,4 @@ struct fPoint
 		assert(num == 0);
 		return fPoint(x / num, y / num);
 	}
-	
-
-
 };
