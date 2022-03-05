@@ -36,8 +36,8 @@ void Monster::Update()
 	}
 	SetPos(CurPos);								//변경된 값을 SetPos 해줍니다.
 
-	int shoot = rand() % 1000 + 1;
-	if (shoot >= 999)
+	int shoot = rand() % 100 + 1;
+	if (shoot >= 99)
 	{ 
 		ShootBullet();
 	}
@@ -47,7 +47,7 @@ void Monster::ShootBullet()
 {
 	
 	fPoint vShootBullet = GetPos();
-	vShootBullet.y -= GetScale().y / 2.f;//TODO:몬스터 총알 랜덤으로 쏘게하기, 연산자 재정의 시전
+	vShootBullet.y -= GetScale().y-150;//TODO:몬스터 총알 랜덤으로 쏘게하기, 연산자 재정의 시전
 
 	Bullet* pMBullet = new Bullet;
 	pMBullet->SetPos(vShootBullet);
