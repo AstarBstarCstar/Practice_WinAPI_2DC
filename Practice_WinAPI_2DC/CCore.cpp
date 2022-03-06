@@ -1,6 +1,5 @@
 #include "framework.h"
 #include "CCore.h"
-#include "GameObject.h"
 
 CCore::CCore()
 {
@@ -45,6 +44,7 @@ void CCore::Render()
 /*코어를 초기화 하는 영역입니다.*/
 void CCore::Init()
 {
+	PathManager::GetInst()->Init();
 	TimeManager::GetInst()->Init();
 	KeyManager::GetInst()->Init();
 	SceneManager::GetInst()->Init();

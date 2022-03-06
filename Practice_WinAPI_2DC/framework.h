@@ -14,6 +14,7 @@
 #include <memory.h>
 #include <tchar.h>
 #include <string>
+#include <assert.h>
 #include <math.h>
 
 /*STL*/
@@ -76,4 +77,6 @@ extern HWND hWnd;              /*어딘가에 이 변수가 있을거니까 그�
 #include "Struct.h"
 #include "KeyManager.h"
 #include "SceneManager.h"
+#include "PathManager.h"
+#include "Texture.h"
 

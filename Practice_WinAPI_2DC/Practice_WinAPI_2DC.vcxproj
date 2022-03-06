@@ -156,6 +156,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="Monster.h" />
+    <ClInclude Include="PathManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Practice_WinAPI_2DC.h" />
     <ClInclude Include="Resource.h" />
@@ -163,8 +164,11 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SceneStart.h" />
     <ClInclude Include="SingleTon.h" />
+    <ClInclude Include="Sound.h" />
+    <ClInclude Include="Source.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeManager.h" />
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +177,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="PathManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Practice_WinAPI_2DC.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -185,6 +190,9 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneStart.cpp" />
+    <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -34,7 +34,7 @@ void Player::Update()//부모에 있던 움직이는 코드를 플레이어 클래스에서 진행합니�
 void Player::CreateBullet()
 {
 	fPoint vBulletPos = GetPos();
-	vBulletPos.y -= GetScale().y / 2.f;//TODO:몬스터 총알 랜덤으로 쏘게하기, 연산자 재정의 시전
+	vBulletPos.y -= GetScale().y / 2.f;
 
 	Bullet* pBullet = new Bullet;
 	pBullet->SetPos(vBulletPos);

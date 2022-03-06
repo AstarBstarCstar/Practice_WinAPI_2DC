@@ -40,15 +40,21 @@
     <Filter Include="Engine\Objects\Bullet">
       <UniqueIdentifier>{0473f903-a4c5-4bd1-becf-6ba03c6ac202}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Resource">
+      <UniqueIdentifier>{9b12c275-9f2e-4d90-b152-f7ba8c1ac23d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Resource\Texture">
+      <UniqueIdentifier>{68981c37-b25e-4015-ad4d-43edf2efa073}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Resource\Sound">
+      <UniqueIdentifier>{ebabf32b-4abb-4f20-9a86-9eb9851e4efd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Practice_WinAPI_2DC.h">
@@ -90,6 +96,21 @@
     <ClInclude Include="Bullet.h">
       <Filter>Engine\Objects\Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Source.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Engine\Resource\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Engine\Resource\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="PathManager.h">
+      <Filter>Engine\Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Practice_WinAPI_2DC.cpp">
@@ -124,6 +145,18 @@
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>Engine\Objects\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Engine\Resource\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Engine\Resource\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="PathManager.cpp">
+      <Filter>Engine\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
