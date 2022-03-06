@@ -15,12 +15,7 @@ SceneStart::~SceneStart()
 
 void SceneStart::Enter()
 {
-	/*Texture 로딩하기*/
-	Texture* pTexture = new Texture;
-	wstring str_FilePath = PathManager::GetInst()->GetContentsPath();
-	str_FilePath += L"texture\\pat.bmp";//경로를 불러오고, 쓸 bmp 파일의 상세경로를 입력.
-	pTexture->Load(str_FilePath);//만든 이미지 함수에 넣기
-	pTexture; //<- 이 변수가 바로 이미지 정보가 담긴 변수
+
 
 	GameObject* PointObj = new Player;
 	PointObj->SetPos(fPoint(100.f, 100.f));
