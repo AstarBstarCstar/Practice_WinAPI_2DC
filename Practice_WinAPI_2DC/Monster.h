@@ -7,6 +7,7 @@ private:
 	float		m_fMaxDis;
 	fPoint    m_fCenterPos;
 	int			m_iDir; //우측이면 양수 좌측이면 음수
+	Texture* m_pMonTexture;
 
 
 public:
@@ -22,5 +23,6 @@ public:
 
 
 	virtual void Update();
+	virtual void Render(HDC _dc);
 };
 

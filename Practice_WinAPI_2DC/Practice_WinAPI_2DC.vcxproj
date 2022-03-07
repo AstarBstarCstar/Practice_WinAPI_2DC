@@ -169,6 +169,7 @@
     <ClInclude Include="Struct.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Tile.h" />
     <ClInclude Include="TimeManager.h" />
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +194,7 @@
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>

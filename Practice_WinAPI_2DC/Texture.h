@@ -4,7 +4,7 @@ class Texture : public Source
 {
 public:
 	HDC				m_DC;
-	HBITMAP		m_hBit;
+	HBITMAP		m_hBMP;
 	BITMAP		m_bitInfo;//정보를 받을 비트맵 구조체
 
 public:

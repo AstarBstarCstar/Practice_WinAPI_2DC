@@ -49,6 +49,9 @@
     <Filter Include="Engine\Resource\Sound">
       <UniqueIdentifier>{ebabf32b-4abb-4f20-9a86-9eb9851e4efd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Objects\Tiles">
+      <UniqueIdentifier>{02a0f7d3-d772-4c39-bf0d-21a914bfc698}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -111,6 +114,9 @@
     <ClInclude Include="PathManager.h">
       <Filter>Engine\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Engine\Objects\Tiles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Practice_WinAPI_2DC.cpp">
@@ -157,6 +163,9 @@
     </ClCompile>
     <ClCompile Include="PathManager.cpp">
       <Filter>Engine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Engine\Objects\Tiles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

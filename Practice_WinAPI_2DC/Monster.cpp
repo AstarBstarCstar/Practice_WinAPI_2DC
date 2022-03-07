@@ -2,6 +2,7 @@
 #include "Monster.h"
 #include "Bullet.h"
 #include "Scene.h"
+#include "Texture.h"
 #include <time.h>
 #include <stdlib.h>
 
@@ -15,10 +16,19 @@ Monster::Monster()
 	m_fSpeed = 300.f;
 	m_fMaxDis = 500.f;
 	m_iDir = 1;
+
+	/*Texture 로딩하기*/
+	m_pMonTexture = new Texture;//<- 이 변수가 바로 이미지 정보가 담길 변수
+	wstring str_Path = PathManager::GetInst()->GetContentsPath();
+	str_Path += L"texture\\pa.bmp";//경로를 불러오고, 쓸 bmp 파일의 상세경로를 입력.
+	m_pMonTexture->Load(str_Path);//만든 이미지 함수에 넣기
+	
 }
 
 Monster::~Monster()
 {
+	if (nullptr != m_pMonTexture)
+		delete m_pMonTexture;
 }
 
 void Monster::Update()
@@ -41,6 +51,14 @@ void Monster::Update()
 	{ 
 		ShootBullet();
 	}
+}
+
+void Monster::Render(HDC _dc)
+{
+	int iWidth = m_pMonTexture->Width();
+	int iHeigh = m_pMonTexture->Heigh();
+	fPoint Pos = GetPos();
+	BitBlt(_dc, Pos.x - int((float)(iWidth / 2)), int(Pos.y - (float)(iHeigh / 2)), iWidth, iHeigh, m_pMonTexture->GetDC(), 0, 0, SRCCOPY);
 }
 
 void Monster::ShootBullet()

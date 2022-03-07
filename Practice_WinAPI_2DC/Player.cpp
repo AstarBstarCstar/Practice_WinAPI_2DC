@@ -9,7 +9,7 @@ Player::Player()
 	/*Texture 로딩하기*/
 	m_pTexture = new Texture;//<- 이 변수가 바로 이미지 정보가 담길 변수
 	wstring str_FilePath = PathManager::GetInst()->GetContentsPath();
-	str_FilePath += L"texture\\EryiTest.bmp";//경로를 불러오고, 쓸 bmp 파일의 상세경로를 입력.
+	str_FilePath += L"texture\\pa.bmp";//경로를 불러오고, 쓸 bmp 파일의 상세경로를 입력.
 	m_pTexture->Load(str_FilePath);//만든 이미지 함수에 넣기
 }
 
