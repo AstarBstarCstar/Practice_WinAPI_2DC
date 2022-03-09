@@ -117,6 +117,12 @@
     <ClInclude Include="Tile.h">
       <Filter>Engine\Objects\Tiles</Filter>
     </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>Engine\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Engine\Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Practice_WinAPI_2DC.cpp">
@@ -166,6 +172,12 @@
     </ClCompile>
     <ClCompile Include="Tile.cpp">
       <Filter>Engine\Objects\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Engine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Engine\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -21,8 +21,8 @@ void CCore::Update()
 {
 	KeyManager::GetInst()->Update();
 	TimeManager::GetInst()->Update();
-
 	SceneManager::GetInst()->Update();
+	/*UIManager::GetInst->Update();*/
 }
 
 /*게임을 그려주는 영역입니다*/
@@ -48,6 +48,7 @@ void CCore::Init()
 	TimeManager::GetInst()->Init();
 	KeyManager::GetInst()->Init();
 	SceneManager::GetInst()->Init();
+	
 
 	m_hDC = GetDC(hWnd);
 

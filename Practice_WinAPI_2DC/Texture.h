@@ -2,6 +2,7 @@
 #include "Source.h"
 class Texture : public Source
 {
+	friend class ResourceManager;
 public:
 	HDC				m_DC;
 	HBITMAP		m_hBMP;
@@ -15,7 +16,7 @@ public:
 	HDC GetDC() { return m_DC; }
 
 
-public:
+private:
 	Texture();
 	~Texture();
 };

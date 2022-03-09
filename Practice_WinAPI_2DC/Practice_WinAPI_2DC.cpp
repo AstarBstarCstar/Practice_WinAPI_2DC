@@ -27,6 +27,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,          /*hInstance : 실행된
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+    /*_CrtSetBreakAlloc();*/
     // TODO: 여기에 코드를 입력합니다.
 
     /*리소스 뷰의 string table 용도*/

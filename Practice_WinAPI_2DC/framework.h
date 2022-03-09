@@ -7,19 +7,26 @@
 
 // Windows 헤더 파일
 #include <windows.h>
+#pragma comment ( lib , "Msimg32.lib" )
 
 // C 런타임 헤더 파일입니다.
 #include <stdlib.h>
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
-#include <string>
 #include <assert.h>
 #include <math.h>
+#include <crtdbg.h>
 
 /*STL*/
 #include <vector>
-using namespace std;
+#include <map>
+#include <string>
+using std::vector;
+using std::map;
+using std::make_pair;
+using std::string;
+using std::wstring;
 
 /*:::DEFINE문:::*/
 #define	WINSTARTX	100
@@ -79,4 +86,6 @@ extern HWND hWnd;              /*어딘가에 이 변수가 있을거니까 그�
 #include "SceneManager.h"
 #include "PathManager.h"
 #include "Texture.h"
+#include "ResourceManager.h"
+//#include "UIManager.h"
 
