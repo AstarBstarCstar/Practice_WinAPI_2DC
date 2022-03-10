@@ -1,9 +1,10 @@
 #include "framework.h"
 #include "SceneStart.h"
 #include "GameObject.h"
-
+#include "Sound.h"
 #include "Player.h"
 #include "Monster.h"
+
 
 SceneStart::SceneStart()
 {
@@ -15,7 +16,7 @@ SceneStart::~SceneStart()
 
 void SceneStart::Enter()
 {
-
+	
 
 	GameObject* PointObj = new Player;
 	PointObj->SetPos(fPoint(100.f, 100.f));

@@ -165,7 +165,8 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SceneStart.h" />
     <ClInclude Include="SingleTon.h" />
-    <ClInclude Include="Sound.h" />
+    <ClInclude Include="CSound.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Source.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="targetver.h" />
@@ -194,7 +195,8 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneStart.cpp" />
-    <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="CSound.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Tile.cpp" />

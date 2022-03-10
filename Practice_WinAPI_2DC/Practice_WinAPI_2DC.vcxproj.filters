@@ -81,14 +81,8 @@
     <ClInclude Include="GameObject.h">
       <Filter>Engine\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Engine\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>Engine\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneStart.h">
-      <Filter>Engine\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Engine\Objects\Player</Filter>
@@ -108,7 +102,7 @@
     <ClInclude Include="Texture.h">
       <Filter>Engine\Resource\Texture</Filter>
     </ClInclude>
-    <ClInclude Include="Sound.h">
+    <ClInclude Include="CSound.h">
       <Filter>Engine\Resource\Sound</Filter>
     </ClInclude>
     <ClInclude Include="PathManager.h">
@@ -121,6 +115,15 @@
       <Filter>Engine\Managers</Filter>
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
+      <Filter>Engine\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Engine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneStart.h">
+      <Filter>Engine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
       <Filter>Engine\Managers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -140,14 +143,8 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Engine\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Engine\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>Engine\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneStart.cpp">
-      <Filter>Engine\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Engine\Objects\Player</Filter>
@@ -164,7 +161,7 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Engine\Resource\Texture</Filter>
     </ClCompile>
-    <ClCompile Include="Sound.cpp">
+    <ClCompile Include="CSound.cpp">
       <Filter>Engine\Resource\Sound</Filter>
     </ClCompile>
     <ClCompile Include="PathManager.cpp">
@@ -177,6 +174,15 @@
       <Filter>Engine\Managers</Filter>
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
+      <Filter>Engine\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Engine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneStart.cpp">
+      <Filter>Engine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
       <Filter>Engine\Managers</Filter>
     </ClCompile>
   </ItemGroup>

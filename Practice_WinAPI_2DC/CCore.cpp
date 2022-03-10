@@ -22,6 +22,7 @@ void CCore::Update()
 	KeyManager::GetInst()->Update();
 	TimeManager::GetInst()->Update();
 	SceneManager::GetInst()->Update();
+	SoundManager::GetInst()->Update();
 	/*UIManager::GetInst->Update();*/
 }
 
@@ -48,6 +49,7 @@ void CCore::Init()
 	TimeManager::GetInst()->Init();
 	KeyManager::GetInst()->Init();
 	SceneManager::GetInst()->Init();
+	SoundManager::GetInst()->Init();
 	
 
 	m_hDC = GetDC(hWnd);

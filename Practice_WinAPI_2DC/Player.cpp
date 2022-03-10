@@ -3,6 +3,7 @@
 #include "Bullet.h"
 #include "Scene.h"
 #include "Texture.h"
+#include "Sound.h"
 
 Player::Player()
 {
@@ -42,6 +43,12 @@ void Player::Update()//부모에 있던 움직이는 코드를 플레이어 클래스에서 진행합니�
 	if (KEY_STATE GetButton(VK_SHIFT))
 	{
 		CreateBullet();
+	}
+	if (KEY_STATE GetButtonDown(VK_CONTROL))
+	{
+		Sound* pSound = new Sound;
+		pSound->Load(L"contents\\sound\\Maple2Boss4.wav");
+		pSound->Play();
 	}
 	SetPos(m_fptPos);
 }

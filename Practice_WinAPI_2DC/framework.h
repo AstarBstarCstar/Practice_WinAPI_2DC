@@ -87,5 +87,6 @@ extern HWND hWnd;              /*어딘가에 이 변수가 있을거니까 그�
 #include "PathManager.h"
 #include "Texture.h"
 #include "ResourceManager.h"
+#include "SoundManager.h"
 //#include "UIManager.h"
 

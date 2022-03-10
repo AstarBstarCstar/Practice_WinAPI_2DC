@@ -30,6 +30,22 @@ Texture* ResourceManager::FindTexture(const wstring& _strKey)
 	return iter->second;//TODO: iter->second의 뜻이 무엇?
 }
 
+Sound* ResourceManager::FindSound(const wstring& Key)
+{
+	map<wstring, Sound*>::iterator iter = m_mapSound.begin(); iter != m_mapSound.end(); iter++
+	{
+		if (nullptr == iter)
+		{
+			return nullptr;
+		}
+	}
+}
+
+Sound* ResourceManager::LoadSound(const wstring& Key)
+{
+	return nullptr;
+}
+
 
 ResourceManager::ResourceManager()
 {
@@ -40,5 +56,13 @@ ResourceManager::~ResourceManager()
 	for (; iter != m_mapTex.end(); iter++)
 	{
 		delete iter->second;
+	}
+
+	for (map<wstring, Sound*>::iterator iter = m_mapSound.begin(); iter != m_mapSound.end(); iter++)
+	{
+		if (nullptr == iter)
+		{
+			return nullptr;
+		}
 	}
 }
