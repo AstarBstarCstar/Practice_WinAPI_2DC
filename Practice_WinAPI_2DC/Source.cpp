@@ -1,10 +1,10 @@
 #include "framework.h"
-#include "CSource.h"
+#include "Source.h"
 
-Source::CSource()
+Source::Source()
 {
 }
 
-Source::~CSource()
+Source::~Source()
 {
 }

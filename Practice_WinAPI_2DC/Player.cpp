@@ -3,7 +3,7 @@
 #include "Bullet.h"
 #include "Scene.h"
 #include "Texture.h"
-#include "Sound.h"
+#include "CSound.h"
 
 Player::Player()
 {
@@ -24,31 +24,30 @@ void Player::Update()//부모에 있던 움직이는 코드를 플레이어 클래스에서 진행합니�
 {
 	fPoint m_fptPos = GetPos();//지역변수 변경점을 다시 셋 시켜줘야 함
 	
-	if (KEY_STATE GetButton(VK_LEFT))
+	if (Key(VK_LEFT))
 	{
 		m_fptPos.x -= 500 * fDT
 	}
-	if (KEY_STATE GetButton(VK_RIGHT))
+	if (Key(VK_RIGHT))
 	{
 		m_fptPos.x += 500 * fDT
 	}
-	if (KEY_STATE GetButton(VK_UP))
+	if (Key(VK_UP))
 	{
 		m_fptPos.y -= 500 * fDT
 	}
-	if (KEY_STATE GetButton(VK_DOWN))
+	if (Key(VK_DOWN))
 	{
 		m_fptPos.y += 500 * fDT
 	}
-	if (KEY_STATE GetButton(VK_SHIFT))
+	if (KeyDown(VK_SHIFT))
 	{
 		CreateBullet();
 	}
-	if (KEY_STATE GetButtonDown(VK_CONTROL))
-	{
-		Sound* pSound = new Sound;
-		pSound->Load(L"contents\\sound\\Maple2Boss4.wav");
-		pSound->Play();
+	if (KeyDown(VK_CONTROL))
+	{		
+		CSound* sound = ResourceManager::GetInst()->LoadSound(L"Test", L"sound\\Maple2Boss3.wav");
+		sound->Play();
 	}
 	SetPos(m_fptPos);
 }

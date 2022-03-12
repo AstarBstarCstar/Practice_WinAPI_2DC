@@ -1,7 +1,7 @@
 #include "framework.h"
 #include "SceneStart.h"
 #include "GameObject.h"
-#include "Sound.h"
+#include "CSound.h"
 #include "Player.h"
 #include "Monster.h"
 

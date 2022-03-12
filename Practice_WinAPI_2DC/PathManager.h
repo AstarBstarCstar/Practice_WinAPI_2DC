@@ -8,6 +8,6 @@ private:
 public:
 	void Init();
 	const wchar_t* GetContentsPath() { return m_ContentsPath; } //const로 묶은 이유는, 찾은 경로가 훼손되면 안 돼기 때문.
-	const wchar_t* GetContensRelativePath() { return L"..\\Release\\contents"; }
+	const wchar_t* GetRelativeContentPath();
 };
 

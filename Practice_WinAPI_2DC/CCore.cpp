@@ -19,8 +19,8 @@ CCore::~CCore()
 /*게임의 정보들 입력등 갱신해주는 영역입니다*/
 void CCore::Update()
 {
-	KeyManager::GetInst()->Update();
 	TimeManager::GetInst()->Update();
+	KeyManager::GetInst()->Update();
 	SceneManager::GetInst()->Update();
 	SoundManager::GetInst()->Update();
 	/*UIManager::GetInst->Update();*/

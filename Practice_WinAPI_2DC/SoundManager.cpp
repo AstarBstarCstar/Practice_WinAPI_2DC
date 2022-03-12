@@ -1,23 +1,22 @@
 #include "framework.h"
 #include "SoundManager.h"
-#include "Sound.h"
+#include "CSound.h"
 
 
 SoundManager::SoundManager()
 {
-	m_pSystem = nullptr;
 }
 SoundManager::~SoundManager()
 {
+	m_pSystem->release();
+	m_pSystem->close();
 }
 
 void SoundManager::Init()
 {
-	FMOD_RESULT Result;
-	FMOD::System_Create(&m_pSystem);
-	assert(!Result);
-	Result = m_pSystem->init(32, FMOD_INIT_NORMAL, nullptr);
-	assert(!Result);
+	System_Create(&m_pSystem);
+	/*assert(!m_pSystem);*/
+	m_pSystem->init(32, FMOD_INIT_NORMAL, nullptr);
 }
 
 void SoundManager::Update()
@@ -26,67 +25,72 @@ void SoundManager::Update()
 	m_pSystem->update();
 }
 
-const System* SoundManager::GetSystem()
+System* SoundManager::GetSystem()
 {
 	return m_pSystem;
 }
 
-void SoundManager::AddSound(wstring Key, wstring Path, bool bgm)
+void SoundManager::AddSound(wstring Key, wstring Path, bool bgm, bool loop)
 {
-	Sound* pSound = ResourceManager::GetInst()->LoadSound(Key,Path);
-	pSound->Load();
+	CSound* pSound;
+	if (bgm)
+	{
+		pSound = ResourceManager::GetInst()->LoadBGM(Key, Path);
+	}
+	else
+	{
+		pSound = ResourceManager::GetInst()->LoadSound(Key, Path);
+	}
 	m_mapSound.insert(make_pair(Key, pSound));
 }
 
 
 void SoundManager::Play(wstring Key)
 {
-	map<wstring, Sound*>::iterator iter = m_mapSound.find(Key);
-	if (iter == m_mapSound.end())
-		return;
-
-	iter->second->Play();
+	map<wstring, CSound*>::iterator iter = m_mapSound.find(Key);
+	if (iter != m_mapSound.end())
+		iter->second->Play();
 }
 
 void SoundManager::Resume(wstring Key)
 {
-	map<wstring, Sound*>::iterator iter = m_mapSound.find(Key);
-	if (iter == m_mapSound.end())
-		return;
-
-	iter->second->Resume();
+	map<wstring, CSound*>::iterator iter;
+	for (iter = m_mapSound.begin(); iter != m_mapSound.end(); iter++)
+	{
+		if (Key == iter->first)
+		{
+			iter->second->Resume();
+			break;
+		}
+	}
 }
 
 void SoundManager::Pause(wstring Key)
 {
-	map<wstring, Sound*>::iterator iter = m_mapSound.find(Key);
-	if (iter == m_mapSound.end())
-		return;
-
-	iter->second->Pause();
+	map<wstring, CSound*>::iterator iter = m_mapSound.find(Key);
+	if (iter != m_mapSound.end())
+		iter->second->Pause();
 }
 
 void SoundManager::Stop(wstring Key)
 {
-	map<wstring, Sound*>::iterator iter = m_mapSound.find(Key);
-	if (iter == m_mapSound.end())
-		return;
-
-	iter->second->Stop();
+	map<wstring, CSound*>::iterator iter = m_mapSound.find(Key);
+	if (iter != m_mapSound.end())
+		iter->second->Stop();
 }
 
 bool SoundManager::SoundPlaying(wstring Key)
 {
-	map<wstring, Sound*>::iterator iter = m_mapSound.find(Key);
-	if (iter == m_mapSound.end())
-		assert(nullptr);
-	return iter->second->SoundPlaying();
+	map<wstring, CSound*>::iterator iter = m_mapSound.find(Key);
+	if (iter != m_mapSound.end())
+		return iter->second->SoundPlaying();
+	return false;
 }
 
 bool SoundManager::SoundPause(wstring Key)
 {
-	map<wstring, Sound*>::iterator iter = m_mapSound.find(Key);
-	if (iter == m_mapSound.end())
-		assert(nullptr);
-	return iter->second->SoundPause();
+	map<wstring, CSound*>::iterator iter = m_mapSound.find(Key);
+	if (iter != m_mapSound.end())
+		return iter->second->SoundPause();
+	return false;
 }

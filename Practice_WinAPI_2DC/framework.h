@@ -38,7 +38,9 @@ using std::wstring;
 
 #define	fDT			TimeManager::GetInst()->GetDT();
 
-#define KEY_STATE KeyManager::GetInst()->
+#define Key(key)		KeyManager::GetInst()->GetButton(key)
+#define KeyUp(key)		KeyManager::GetInst()->GetButtonUP(key)
+#define KeyDown(key)	KeyManager::GetInst()->GetButtonDown(key)
 
 
 

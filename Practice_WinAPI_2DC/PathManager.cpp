@@ -28,3 +28,12 @@ PathManager::PathManager()
 PathManager::~PathManager()
 {
 }
+
+const wchar_t* PathManager::GetRelativeContentPath()
+{
+#ifdef _DEBUG
+	return L"..\\Release\\contents\\";
+#else
+	return L"contents\\";
+#endif
+}

@@ -8,15 +8,15 @@ class SoundManager
 	SINGLETON(SoundManager);
 
 private:
-	map<wstring, Sound*>m_mapSound;
+	map<wstring, CSound*>m_mapSound;
 	System* m_pSystem;
 public:
+	System* GetSystem();
+
 	void Init();
 	void Update();
 
-	const System* GetSystem();
-
-	void AddSound(wstring Key, wstring Path, bool bgm);
+	void AddSound(wstring Key, wstring Path,bool bgm = false, bool loop = false);
 	void Play(wstring Key);
 	void Resume(wstring Key);
 	void Pause(wstring Key);
