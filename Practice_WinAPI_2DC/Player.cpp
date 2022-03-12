@@ -43,10 +43,12 @@ void Player::Update()//부모에 있던 움직이는 코드를 플레이어 클래스에서 진행합니�
 	if (KeyDown(VK_SHIFT))
 	{
 		CreateBullet();
+		CSound* Fire = ResourceManager::GetInst()->LoadSound(L"Fire", L"sound\\PELLET_FIRE.wav");
+		Fire->Play();
 	}
 	if (KeyDown(VK_CONTROL))
 	{		
-		CSound* sound = ResourceManager::GetInst()->LoadSound(L"Test", L"sound\\Maple2Boss3.wav");
+		CSound* sound = ResourceManager::GetInst()->LoadBGM(L"Test", L"sound\\Maple2Boss3.wav");
 		sound->Play();
 	}
 	SetPos(m_fptPos);
