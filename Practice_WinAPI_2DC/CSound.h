@@ -7,8 +7,8 @@ using namespace FMOD;
 class CSound : public Source
 {
 private:
-	/*System*	    m_pSystem;*/
-	Sound*		m_pSound;
+	System*	    m_pSystem;
+	Sound*			m_pSound;
 	Channel*		m_pChannel;
 
 public:

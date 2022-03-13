@@ -5,18 +5,21 @@
 
 SoundManager::SoundManager()
 {
+	m_pSystem = nullptr;
 }
 SoundManager::~SoundManager()
 {
-	m_pSystem->release();
-	m_pSystem->close();
+		m_pSystem->release();
+		m_pSystem->close();
 }
 
 void SoundManager::Init()
 {
-	System_Create(&m_pSystem);
-	/*assert(!m_pSystem);*/
-	m_pSystem->init(32, FMOD_INIT_NORMAL, nullptr);
+	FMOD_RESULT result;
+	result = System_Create(&m_pSystem);
+	assert(!result);
+	result = m_pSystem->init(32, FMOD_INIT_NORMAL, nullptr);
+	assert(!result);
 }
 
 void SoundManager::Update()

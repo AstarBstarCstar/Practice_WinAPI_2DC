@@ -3,6 +3,27 @@
 #include "Texture.h"
 #include "CSound.h"
 
+ResourceManager::ResourceManager()
+{
+}
+ResourceManager::~ResourceManager()
+{
+	map<wstring, Texture*>::iterator iter = m_mapTex.begin();
+	for (; iter != m_mapTex.end(); iter++)
+	{
+		delete iter->second;
+	}
+
+	for (map<wstring, CSound*>::iterator iter = m_mapSound.begin(); iter != m_mapSound.end(); iter++)
+	{
+		if (nullptr != iter->second)
+		{
+			delete iter->second;
+		}
+	}
+	m_mapSound.clear();
+}
+
 Texture* ResourceManager::LoadTexture(const wstring& _strKey, const wstring& _strPath)//인자로 불러올 이름, 상대경로를 받음.
 {
 	Texture* pTexture = FindTexture(_strKey);
@@ -90,23 +111,3 @@ CSound* ResourceManager::LoadBGM(const wstring& strKey, const wstring& strRelati
 }
 
 
-ResourceManager::ResourceManager()
-{
-}
-ResourceManager::~ResourceManager()
-{
-	map<wstring, Texture*>::iterator iter = m_mapTex.begin();
-	for (; iter != m_mapTex.end(); iter++)
-	{
-		delete iter->second;
-	}
-
-	for (map<wstring, CSound*>::iterator iter = m_mapSound.begin(); iter != m_mapSound.end(); iter++)
-	{
-		if (nullptr != iter->second)
-		{
-			delete iter->second;
-		}
-	}
-	m_mapSound.clear();
-}

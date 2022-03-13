@@ -9,10 +9,10 @@ CSound::CSound()
 CSound::~CSound()
 {
 	Stop();
-	if (nullptr != m_pSound)
+	if (nullptr != m_pSystem)//channel system 변경
 	{
-		m_pSound->release();
-	}//TODO:Help!이부분에서 자꾸 예외처리 발생 
+	 m_pSound->release();
+	}
 }
 
 void CSound::Load(const wstring& _strPath,bool bgm)
